@@ -3,18 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--CSS-->
+    <link rel="stylesheet" href="style.css">
+    <!--JAVASCRIPT-->
+    <script src="script.js" defer></script>
     <title>Calculator</title>
 </head>
 <body>
-    <div class="calculator-container"> 
 
+    <div class="calculator-container"> 
         <div class="header">
-            <ul class="info-bar">
-                <li class="header left">11:11</li>
-                <li class="header right">data</li>
-                <li class="header right">wifi</li>
-                <li class="header right">[:::  ]:</li>
-            </ul>
+            <div class="info-bar">
+                <div class="left">11:11</div>
+                <div class="right">
+                    <!--to be replaced by icons/images-->
+                    <span>data</span>
+                    <span>wifi</span>
+                    <span>[:::  ]:</span>
+                </div>
+
+            </div>
             <div class="mode">
                 <button class="light">Sun</button>
                 <button class="dark">Moon</button>
@@ -24,6 +32,7 @@
         <div class="input-container">
             <!--Here is where the calculated
                 numbers will be shown!-->
+                <h1>1210</h1>
         </div>
 
         <div class="buttons-container">
@@ -48,7 +57,8 @@
             <button id=".">.</button>
             <button id="=">=</button>
         </div>
-        
+
     </div>
+
 </body>
 </html>
