@@ -16,7 +16,10 @@ body {
     display: flex;
     flex-direction: column;
     background-color: antiquewhite;
-    width: 450px;
+    width: 400px;
+    height: 700px;
+    border-style: solid;
+    border-radius: 24px;
 }
 
 /*HEADER SECTION*/
@@ -29,6 +32,12 @@ body {
     display: flex;
     list-style-type: none;
     justify-content: space-between;
+    background-color: rgb(133, 133, 133);
+    padding: 5px;
+    height:20px;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    
 }
 
 span {
@@ -38,15 +47,23 @@ span {
 .mode {
     text-align: center;
 }
+.mode > button {
+    height: 45px;
+    width: 70px;
+}
 
 /*INPUT SECTION*/
 .input-container {
     display: flex;
     justify-content: end;
     align-items: end;
-    height: 100px;
+    min-height: 100px;
+    flex:1;
 }
-
+h1 {
+    font-size: 50px;
+    padding-right: 10px;
+}
 /*BUTTONS SECTION*/
 .buttons-container {
     display: flex;
@@ -54,9 +71,11 @@ span {
     align-items: center;
     flex-wrap:wrap;
     gap: 10px;
+    padding: 20px;
 }
 
 .buttons-container > button {
-    height: 90px;
-    width: 90px;
+    height: 80px;
+    width: 80px;
+    font-size: 20px;
 }
