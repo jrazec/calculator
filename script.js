@@ -1,6 +1,6 @@
 const answerField = document.getElementById('answer');
 
-let operator = [];
+let operator;
 let arrNum = [];
 
 let answer; //this should be float
@@ -16,6 +16,7 @@ function multiply(firstNum,nextNum){
 }
 function divide(firstNum,nextNum){
     answer = firstNum / nextNum;
+    answer = answer.toFixed(10);
 }
 
 //              Display and Operation
@@ -56,16 +57,16 @@ operatorButtons.forEach(button=>{
     button.addEventListener('click', ()=>{
         i = 1; 
         if(arrNum[1] !== undefined){
-            if(operator[i] == "+"){
+            if(operator == "+"){
                 operate(add,parseFloat(arrNum[0]),parseFloat(arrNum[1]));
                 console.log(answer);
-            }else if(operator[i] == "-"){
+            }else if(operator == "-"){
                 operate(minus,parseFloat(arrNum[0]),parseFloat(arrNum[1]));
                 console.log(answer);
-            }else if(operator[i] == "*"){
+            }else if(operator == "*"){
                 operate(multiply,parseFloat(arrNum[0]),parseFloat(arrNum[1]));
                 console.log(answer);
-            }else if(operator[i] == "/"){
+            }else if(operator == "/"){
                 operate(divide,parseFloat(arrNum[0]),parseFloat(arrNum[1]));
                 console.log(answer);
             }
@@ -73,7 +74,7 @@ operatorButtons.forEach(button=>{
             arrNum[1] = "";
             displayNumber();
         }
-        operator[1] = button.id;
+        operator = button.id;
         
     });
 });
