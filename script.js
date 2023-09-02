@@ -34,6 +34,7 @@ function operate(operation, firstNum, secondNum){
 const numberButtons = document.querySelectorAll('.number');//try to convert in array list
 const operatorButtons = document.querySelectorAll('.operator');
 const clearButton = document.getElementById('clear');
+const backspaceButton = document.getElementById('backspace');
 const signButton = document.getElementById('sign');
 const decimalButton = document.getElementById('.');
 const equalButton = document.getElementById('=');
@@ -42,8 +43,9 @@ i = 0;
 //              Event Listeners for Buttons
 numberButtons.forEach(button=>{
     button.addEventListener('click',() => {
+        
         if(arrNum[i] !== undefined){
-            arrNum[i] += button.id;
+            arrNum[i] += (button.id);
         }else{
             arrNum[i] = button.id;
             
@@ -56,30 +58,49 @@ numberButtons.forEach(button=>{
 operatorButtons.forEach(button=>{
     button.addEventListener('click', ()=>{
         i = 1; 
+        if(arrNum[0]=== undefined){
+            arrNum[0] = 0;
+        }
         if(arrNum[1] !== undefined){
+            //inorder for these to be converted to float every clicks; 
+            //having these, arryNum[1] will always be converted to float and answer wont result to NaN
+            arrNum[0] = parseFloat(arrNum[0]);
+            arrNum[1] = parseFloat(arrNum[1]);
             if(operator == "+"){
-                operate(add,parseFloat(arrNum[0]),parseFloat(arrNum[1]));
+                operate(add,arrNum[0],arrNum[1]);
                 console.log(answer);
             }else if(operator == "-"){
-                operate(minus,parseFloat(arrNum[0]),parseFloat(arrNum[1]));
+                operate(minus,arrNum[0],arrNum[1]);
                 console.log(answer);
             }else if(operator == "*"){
-                operate(multiply,parseFloat(arrNum[0]),parseFloat(arrNum[1]));
+                operate(multiply,arrNum[0],arrNum[1]);
                 console.log(answer);
             }else if(operator == "/"){
-                operate(divide,parseFloat(arrNum[0]),parseFloat(arrNum[1]));
+                operate(divide,arrNum[0],arrNum[1]);
                 console.log(answer);
             }
             arrNum[0] = answer;
             arrNum[1] = "";
-            displayNumber();
+            displayNumber(i);
+        }else{
+           
         }
         operator = button.id;
         
     });
 });
 
-equalButton.addEventListener('click', () => displayNumber());
+equalButton.addEventListener('click', () => {
+    i = 0;
+    displayNumber();
+    
+});
 
-
+backspaceButton.addEventListener('click', () => {
+    //if arr num is undefined chuchuness
+   
+    arrNum[i] = arrNum[i].slice(0,(arrNum[i].length -1));
+    console.log(arrNum[i])
+    displayValues(i);
+});
 
