@@ -1,10 +1,35 @@
-let firstNum;
-let secondNum;
-let operator;
-let stringNum = "";//string
-let answer = "trial"; //this should be float
+const answerField = document.getElementById('answer');
 
-const numberDisplay = document.querySelector('h1');
+let operator = [];
+let arrNum = [];
+
+let answer; //this should be float
+//              Function Operators
+function add(firstNum,nextNum){
+    answer = firstNum + nextNum;
+}
+function minus(firstNum,nextNum){
+    answer = firstNum - nextNum;
+}
+function multiply(firstNum,nextNum){
+    answer = firstNum * nextNum;
+}
+function divide(firstNum,nextNum){
+    answer = firstNum / nextNum;
+}
+
+//              Display and Operation
+function displayNumber() {
+    answerField.textContent = answer;
+}
+function displayValues(i) {
+    answerField.textContent = arrNum[i];
+}
+function operate(operation, firstNum, secondNum){
+    operation(firstNum,secondNum);
+}
+
+
 const numberButtons = document.querySelectorAll('.number');//try to convert in array list
 const operatorButtons = document.querySelectorAll('.operator');
 const clearButton = document.getElementById('clear');
@@ -12,42 +37,48 @@ const signButton = document.getElementById('sign');
 const decimalButton = document.getElementById('.');
 const equalButton = document.getElementById('=');
 
+i = 0;
 //              Event Listeners for Buttons
 numberButtons.forEach(button=>{
     button.addEventListener('click',() => {
-        stringNum += button.id;
+        if(arrNum[i] !== undefined){
+            arrNum[i] += button.id;
+        }else{
+            arrNum[i] = button.id;
+            
+        }
+        displayValues(i);
+        console.log("\n" + arrNum[i]);
     });
 });
 
-//              Function Operators
-function add(num1,num2){
-    answer = num1 + num2;
-    return answer;
-}
-function minus(num1,num2){
-    answer = num1 - num2;
-    return answer;
-}
-function multiply(num1,num2){
-    answer = num1 * num2;
-    return answer;
-}
-function divide(num1,num2){
-    answer = num1 / num2;
-    return answer;
-}
+operatorButtons.forEach(button=>{
+    button.addEventListener('click', ()=>{
+        i = 1; 
+        if(arrNum[1] !== undefined){
+            if(operator[i] == "+"){
+                operate(add,parseFloat(arrNum[0]),parseFloat(arrNum[1]));
+                console.log(answer);
+            }else if(operator[i] == "-"){
+                operate(minus,parseFloat(arrNum[0]),parseFloat(arrNum[1]));
+                console.log(answer);
+            }else if(operator[i] == "*"){
+                operate(multiply,parseFloat(arrNum[0]),parseFloat(arrNum[1]));
+                console.log(answer);
+            }else if(operator[i] == "/"){
+                operate(divide,parseFloat(arrNum[0]),parseFloat(arrNum[1]));
+                console.log(answer);
+            }
+            arrNum[0] = answer;
+            arrNum[1] = "";
+            displayNumber();
+        }
+        operator[1] = button.id;
+        
+    });
+});
 
-//              Display and Operation
-function displayNumber() {
-    numberDisplay.textContent = answer;
-}
-
-function operate(operator, firstNum,secondNum){
-    operator(firstNum,secondNum);
-    displayNumber();
-}
-
-operate(add, 2000, 100);
+equalButton.addEventListener('click', () => displayNumber());
 
 
 
