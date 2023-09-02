@@ -108,4 +108,11 @@ backspaceButton.addEventListener('click', () => {
     displayValues(i);
 });
 
-
+clearButton.addEventListener('click', ()=>{
+    i = 0;
+    arrNum[0] = undefined;
+    arrNum[1] = undefined;
+    answer = 0;
+    operator = "";
+    answerField.textContent = "0";
+});
