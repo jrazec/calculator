@@ -86,7 +86,7 @@ operatorButtons.forEach(button=>{
             }
             arrNum[0] = answer;
             arrNum[1] = "";
-            displayNumber(i);
+            displayValues(0);
         }else{
            
         }
@@ -97,15 +97,15 @@ operatorButtons.forEach(button=>{
 
 equalButton.addEventListener('click', () => {
     i = 0;
-    displayNumber();
+    displayValues(i);
     
 });
 
 backspaceButton.addEventListener('click', () => {
     //if arr num is undefined chuchuness
-   
     arrNum[i] = arrNum[i].slice(0,(arrNum[i].length -1));
     console.log(arrNum[i])
     displayValues(i);
 });
+
 
