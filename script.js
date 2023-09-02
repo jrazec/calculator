@@ -15,8 +15,12 @@ function multiply(firstNum,nextNum){
     answer = firstNum * nextNum;
 }
 function divide(firstNum,nextNum){
+    if(nextNum === 0){
+        answerField.textContent = "Error";
+        return;
+    }
     answer = firstNum / nextNum;
-    answer = answer.toFixed(10);
+    answer = parseFloat(answer.toFixed(10));//to hide the 0 at the end, added parsefloat
 }
 
 //              Display and Operation
@@ -58,10 +62,11 @@ numberButtons.forEach(button=>{
 operatorButtons.forEach(button=>{
     button.addEventListener('click', ()=>{
         i = 1; 
-        if(arrNum[0]=== undefined){
+        
+        if(arrNum[0]=== undefined){//if the user didnt type any number first, automatically 0 will be the value
             arrNum[0] = 0;
         }
-        if(arrNum[1] !== undefined){
+        if(arrNum[1] !== undefined && arrNum[1] !== ""){
             //inorder for these to be converted to float every clicks; 
             //having these, arryNum[1] will always be converted to float and answer wont result to NaN
             arrNum[0] = parseFloat(arrNum[0]);
