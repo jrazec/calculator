@@ -7,12 +7,15 @@ let answer; //this should be float
 //              Function Operators
 function add(firstNum,nextNum){
     answer = firstNum + nextNum;
+    answer = parseFloat(answer.toFixed(10));//to hide the 0 at the end, added parsefloat
 }
 function minus(firstNum,nextNum){
     answer = firstNum - nextNum;
+    answer = parseFloat(answer.toFixed(10));//to hide the 0 at the end, added parsefloat
 }
 function multiply(firstNum,nextNum){
     answer = firstNum * nextNum;
+    answer = parseFloat(answer.toFixed(10));//to hide the 0 at the end, added parsefloat
 }
 function divide(firstNum,nextNum){
     if(nextNum === 0){
@@ -43,13 +46,14 @@ const signButton = document.getElementById('sign');
 const decimalButton = document.getElementById('.');
 const equalButton = document.getElementById('=');
 
-i = 0;
+i = 0;//holder for arrays
+dec = false;//holder for decimal
 //              Event Listeners for Buttons
 numberButtons.forEach(button=>{
     button.addEventListener('click',() => {
         
         if(arrNum[i] !== undefined){
-            arrNum[i] += (button.id);
+            arrNum[i] += button.id;
         }else{
             arrNum[i] = button.id;
             
@@ -91,10 +95,17 @@ operatorButtons.forEach(button=>{
            
         }
         operator = button.id;
-        
+        dec = false;
     });
 });
-
+decimalButton.addEventListener('click', button => {
+    if(!dec){
+        console.log(button.id)
+        arrNum[i] += ".";
+        dec = true;
+    }
+    displayValues(i);
+})
 equalButton.addEventListener('click', () => {
     i = 0;
     displayValues(i);
@@ -104,7 +115,11 @@ equalButton.addEventListener('click', () => {
 backspaceButton.addEventListener('click', () => {
     //if arr num is undefined chuchuness
     arrNum[i] = arrNum[i].slice(0,(arrNum[i].length -1));
+    if(arrNum[i].slice(arrNum[i].length-1) === "."){
+        dec = false;
+    }
     console.log(arrNum[i])
+    
     displayValues(i);
 });
 
