@@ -31,7 +31,7 @@ function displayNumber() {
     answerField.textContent = answer;
 }
 function displayValues(i) {
-    answerField.textContent = arrNum[i];
+    answerField.textContent = parseFloat(arrNum[i]);
 }
 function operate(operation, firstNum, secondNum){
     operation(firstNum,secondNum);
@@ -52,7 +52,7 @@ dec = false;//holder for decimal
 numberButtons.forEach(button=>{
     button.addEventListener('click',() => {
         
-        if(arrNum[i] !== undefined){
+        if(arrNum[i] !== undefined ){
             arrNum[i] += button.id;
         }else{
             arrNum[i] = button.id;
@@ -60,15 +60,22 @@ numberButtons.forEach(button=>{
         }
         displayValues(i);
         console.log("\n" + arrNum[i]);
+        console.log("Answer: ", answer);
+        console.log("arrNum[0]: ", arrNum[0]);
+        console.log("arrNum[1]: ", arrNum[1]);
     });
 });
 
 operatorButtons.forEach(button=>{
     button.addEventListener('click', ()=>{
-        i = 1; 
+        i = 1;  
         
         if(arrNum[0]=== undefined){//if the user didnt type any number first, automatically 0 will be the value
+
             arrNum[0] = 0;
+            console.log("Answer: ", answer);
+            console.log("arrNum[0]: ", arrNum[0]);
+            console.log("arrNum[1]: ", arrNum[1]);
         }
         if(arrNum[1] !== undefined && arrNum[1] !== ""){
             //inorder for these to be converted to float every clicks; 
@@ -77,19 +84,21 @@ operatorButtons.forEach(button=>{
             arrNum[1] = parseFloat(arrNum[1]);
             if(operator == "+"){
                 operate(add,arrNum[0],arrNum[1]);
-                console.log(answer);
+                
             }else if(operator == "-"){
                 operate(minus,arrNum[0],arrNum[1]);
-                console.log(answer);
+                
             }else if(operator == "*"){
                 operate(multiply,arrNum[0],arrNum[1]);
-                console.log(answer);
+        
             }else if(operator == "/"){
                 operate(divide,arrNum[0],arrNum[1]);
-                console.log(answer);
             }
+            console.log("Answer: ", answer);
             arrNum[0] = answer;
-            arrNum[1] = "";
+            arrNum[1] = 0;
+            console.log("arrNum[0]: ", arrNum[0]);
+            console.log("arrNum[1]: ", arrNum[1]);
             displayValues(0);
         }else{
            
@@ -101,15 +110,24 @@ operatorButtons.forEach(button=>{
 decimalButton.addEventListener('click', button => {
     if(!dec){
         console.log(button.id)
-        arrNum[i] += ".";
+        if(arrNum[i] !== undefined){
+            arrNum[i] += ".";
+        }else {
+            arrNum[i] = "0.";
+        }
         dec = true;
     }
+    console.log("Answer: ", answer);
+    console.log("arrNum[0]: ", arrNum[0]);
+    console.log("arrNum[1]: ", arrNum[1]);
     displayValues(i);
 })
 equalButton.addEventListener('click', () => {
     i = 0;
     displayValues(i);
-    
+    console.log("Answer: ", answer);
+    console.log("arrNum[0]: ", arrNum[0]);
+    console.log("arrNum[1]: ", arrNum[1]);
 });
 
 backspaceButton.addEventListener('click', () => {
@@ -118,16 +136,39 @@ backspaceButton.addEventListener('click', () => {
     if(arrNum[i].slice(arrNum[i].length-1) === "."){
         dec = false;
     }
-    console.log(arrNum[i])
+    console.log("Answer: ", answer);
+    console.log("arrNum[0]: ", arrNum[0]);
+    console.log("arrNum[1]: ", arrNum[1]);
     
     displayValues(i);
 });
-
+signButton.addEventListener('click', ()=> {
+    if(arrNum[0]=== undefined){//if the user didnt type any number first, automatically 0 will be the value
+        arrNum[0] = 0;
+        console.log("Answer: ", answer);
+        console.log("arrNum[0]: ", arrNum[0]);
+        console.log("arrNum[1]: ", arrNum[1]);
+    }
+    if(arrNum[1] === 0){//if second container hasnt been used yet, use arr0 or the answer container 
+        i = 0;
+    }
+    arrNum[i] = parseFloat(arrNum[i]) * -1;
+    displayValues(i);
+    
+    console.log("Answer: ", answer);
+    console.log("arrNum[0]: ", arrNum[0]);
+    console.log("arrNum[1]: ", arrNum[1]);
+});
 clearButton.addEventListener('click', ()=>{
     i = 0;
     arrNum[0] = undefined;
     arrNum[1] = undefined;
     answer = 0;
     operator = "";
+    dec = false;
     answerField.textContent = "0";
+    console.log("Answer: ", answer);
+    console.log("arrNum[0]: ", arrNum[0]);
+    console.log("arrNum[1]: ", arrNum[1]);
 });
+
